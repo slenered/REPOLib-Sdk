@@ -4,7 +4,7 @@
 
 ## Features
 
-- Custom valuables (without code)
+- Registering custom valuables without code
 - Automatic Thunderstore packaging
 
 ## Usage
@@ -12,8 +12,7 @@
 This section assumes you already have a Unity project set up for R.E.P.O. modding.
 If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen/unity-repo-project-patcher) first.
 
-<details>
-  <summary><b>Setup</b></summary>
+### Setup
 
 **1. Add REPOLib to the project**
 
@@ -27,10 +26,7 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 - Click the `+` button in the top left and choose `Add package from git URL`.
 - Enter `https://github.com/ZehsTeam/REPOLib-Sdk.git`.
 
-</details>
-
-<details>
-  <summary><b>Create a mod</b></summary>
+### Create a mod
 
 - Create a new folder in your project.
 - Right click in the folder, then choose `Create > REPOLib > Mod`.
@@ -45,36 +41,26 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 > [!TIP]
 > You can have multiple mods in the same project, as long as they're in separate folders.
 
-</details>
-
-<details>
-  <summary><b>Create a valuable</b></summary>
+### Create a valuable
 
 - Create a valuable prefab.
   - More documentation is on its way here. For now, use the vanilla valuables as reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/valuables`.
 - Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Valuable`.
 - Fill in the fields:
+
   - `Prefab`: A reference to your prefab. The prefab does not have to be in the mod folder.
   - `Add to All Levels`: Whether to register the valuable on all levels or specify them yourself.
-  - `Level Names`: The level presets to register the valuable in. Ignored if `Add to All Levels` is `true`. The vanilla values are:
-    - `Valuables - Generic`
-    - `Valuables - Wizard`
-    - `Valuables - Manor`
-    - `Valuables - Arctic`
-    </details>
+  - `Level Names`: The level presets to register the valuable in. Ignored if `Add to All Levels` is `true`. The vanilla values are: - `Valuables - Generic` - `Valuables - Wizard` - `Valuables - Manor` - `Valuables - Arctic`
 
-<details>
-  <summary><b>Export a mod</b></summary>
+### Export a mod
 
 - Select the `Mod` asset and click `Export` in the inspector.
-  - In the window you'll see the associated content files that REPOLib-Sdk found.
+  - In the window you'll see the associated content files found by REPOLib-Sdk.
 - Choose an `Output Path`. If there isn't a folder at the selected path, one will be created.
 - Click `Export` and wait. Once finished, a window should appear showing the exported zip file. This file can be uploaded to Thunderstore, or locally imported into mod managers.
 
 > [!TIP]
 > The export window can also be accessed from `Window > REPOLib Exporter`
-
-</details>
 
 ## Contribute
 
