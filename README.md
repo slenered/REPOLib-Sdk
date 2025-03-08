@@ -5,7 +5,7 @@
 ## Features
 
 - Registering custom valuables without code
-- Automatic Thunderstore packaging
+- Automatic asset bundling and Thunderstore packaging
 
 ## Usage
 
