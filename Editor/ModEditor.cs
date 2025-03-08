@@ -17,6 +17,7 @@ namespace REPOLibSdk.Editor
             Util.PropertyField("_version", serializedObject, root);
             Util.PropertyField("_description", serializedObject, root);
             Util.PropertyField("_dependencies", serializedObject, root);
+            Util.PropertyField("_websiteUrl", serializedObject, root);
             Util.PropertyField("_icon", serializedObject, root);
             Util.PropertyField("_readme", serializedObject, root);
 

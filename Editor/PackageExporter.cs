@@ -65,7 +65,8 @@ namespace REPOLibSdk.Editor
                 Name = mod.Name,
                 Description = mod.Description,
                 Version = mod.Version,
-                Dependencies = mod.Dependencies.ToArray()
+                Dependencies = mod.Dependencies.ToArray(),
+                WebsiteUrl = mod.WebsiteUrl
             };
             
             var json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
@@ -128,6 +129,9 @@ namespace REPOLibSdk.Editor
             
             [JsonProperty("dependencies")]
             public string[] Dependencies;
+            
+            [JsonProperty("website_url")]
+            public string WebsiteUrl;
         }
     }
 }
