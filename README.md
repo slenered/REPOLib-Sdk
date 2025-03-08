@@ -47,10 +47,13 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
   - More documentation is on its way here. For now, use the vanilla valuables as reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/valuables`.
 - Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Valuable`.
 - Fill in the fields:
-
   - `Prefab`: A reference to your prefab. The prefab does not have to be in the mod folder.
   - `Add to All Levels`: Whether to register the valuable on all levels or specify them yourself.
-  - `Level Names`: The level presets to register the valuable in. Ignored if `Add to All Levels` is `true`. The vanilla values are: - `Valuables - Generic` - `Valuables - Wizard` - `Valuables - Manor` - `Valuables - Arctic`
+  - `Level Names`: The level presets to register the valuable in. Ignored if `Add to All Levels` is `true`. The vanilla values are:
+    - `Valuables - Generic`
+    - `Valuables - Wizard`
+    - `Valuables - Manor`
+    - `Valuables - Arctic`
 
 ### Export a mod
 
