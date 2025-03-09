@@ -56,6 +56,13 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
     - `Valuables - Manor`
     - `Valuables - Arctic`
 
+### Create an enemy
+
+- Create an `EnemySetup` by right clicking and going to `Create > Other > Enemy Setup`.
+  - As with valuables, use the vanilla ones as reference.
+- Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Enemy`.
+- Fill in the fields.
+
 ### Export a mod
 
 - Select the `Mod` asset and click `Export` in the inspector.
