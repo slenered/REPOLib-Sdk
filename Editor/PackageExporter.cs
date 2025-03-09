@@ -11,12 +11,24 @@ namespace REPOLibSdk.Editor
 {
     public static class PackageExporter
     {
-        public static IEnumerable<string> FindContents(Mod mod)
+        public static IEnumerable<(string Path, bool IsDependency)> FindContents(Mod mod)
         {
             string modPath = AssetDatabase.GetAssetPath(mod);
             string directory = Path.GetDirectoryName(modPath);
-            return AssetDatabase.FindAssets("t:Content", new[] { directory })
-                .Select(AssetDatabase.GUIDToAssetPath);
+            string[] content = AssetDatabase.FindAssets("t:Content", new[] { directory })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .ToArray();
+            
+            foreach (string asset in content)
+            {
+                yield return (asset, false);
+            }
+
+            string[] dependencies = AssetDatabase.GetDependencies(content);
+            foreach (string dependency in dependencies)
+            {
+                yield return (dependency, true);
+            }
         }
         
         public static void ExportPackage(Mod mod, string outputPath)
@@ -24,7 +36,9 @@ namespace REPOLibSdk.Editor
             CreateDirectoryIfNotExists(outputPath);
             
             string[] assetPaths = FindContents(mod)
-                .Append(AssetDatabase.GetAssetPath(mod))
+                .Where(tuple => !tuple.IsDependency) // BuildAssetBundles collects dependencies by itself
+                .Select(tuple => tuple.Path)
+                .Append(AssetDatabase.GetAssetPath(mod)) // include the Mod
                 .ToArray();
             string bundlePath = Path.GetFullPath(Path.Combine(outputPath, "bundle"));
             bundlePath = BuildAssetBundle(mod, bundlePath, assetPaths);
@@ -69,7 +83,7 @@ namespace REPOLibSdk.Editor
                 WebsiteUrl = mod.WebsiteUrl
             };
             
-            var json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
             File.WriteAllText(Path.Combine(packagePath, "manifest.json"), json);
         }
 

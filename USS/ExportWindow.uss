@@ -1,0 +1,49 @@
+VisualElement {
+}
+
+.wrapper {
+    padding-top: 4px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+}
+
+.label {
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+#export-button {
+}
+
+#content-list {
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    flex-grow: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 5px;
+    margin-right: 3px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-color: var(--unity-colors-default-border);
+    border-right-color: var(--unity-colors-default-border);
+    border-bottom-color: var(--unity-colors-default-border);
+    border-left-color: var(--unity-colors-default-border);
+    border-top-left-radius: var(--unity-metrics-default-border_radius);
+    border-top-right-radius: var(--unity-metrics-default-border_radius);
+    border-bottom-right-radius: var(--unity-metrics-default-border_radius);
+    border-bottom-left-radius: var(--unity-metrics-default-border_radius);
+}
+
+#output-path {
+    margin-top: 8px;
+}
+
+#dependency-label {
+    margin-top: 2px;
+}

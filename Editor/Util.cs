@@ -23,5 +23,10 @@ namespace REPOLibSdk.Editor
             field.Bind(serializedObject);
             return field;
         }
+
+        public static void SetVisible(this VisualElement element, bool visible)
+        {
+            element.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        }
     }
 }

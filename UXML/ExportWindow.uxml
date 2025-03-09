@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Packages/zehs.repolib-sdk/USS/ExportWindow.uss?fileID=7433441132597879392&amp;guid=3464aeaa0a2a7d04095260f955457226&amp;type=3#ExportWindow" />
+    <ui:VisualElement class="wrapper" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-direction: row; flex-shrink: 0;">
+            <uie:ObjectField label="Mod" name="mod" type="REPOLib.Objects.Sdk.Mod, REPOLib" style="flex-grow: 1;" />
+            <ui:Button text="Refresh" parse-escape-sequences="true" display-tooltip-when-elided="true" name="refresh-button" />
+        </ui:VisualElement>
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="content-list">
+            <ui:Label tabindex="-1" text="Please select a mod" parse-escape-sequences="true" display-tooltip-when-elided="true" name="no-mod-label" class="label" style="display: none;" />
+            <ui:Foldout text="Content" name="contents" value="true" class="label" />
+            <ui:Foldout text="Included Assets" name="dependencies" value="false" class="label" />
+        </ui:ScrollView>
+        <ui:TextField picking-mode="Ignore" label="Output Path" value="filler text" name="output-path" />
+        <ui:Button text="Export" parse-escape-sequences="true" display-tooltip-when-elided="true" name="export-button" />
+    </ui:VisualElement>
+</ui:UXML>
