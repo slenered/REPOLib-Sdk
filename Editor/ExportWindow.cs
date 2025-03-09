@@ -94,8 +94,8 @@ namespace REPOLibSdk.Editor
                     .ThenBy(tuple => tuple.Item1.name)
                     .ToArray();
 
-                var contentCount = 0;
-                var dependencyCount = 0;
+                int contentCount = 0;
+                int dependencyCount = 0;
 
                 foreach ((var asset, bool isDependency) in includedAssets)
                 {
@@ -124,7 +124,7 @@ namespace REPOLibSdk.Editor
                 }
 
                 contents.text = $"Content ({contentCount})";
-                dependencies.text = $"Included Assets ({dependencyCount})";
+                dependencies.text = $"Assets ({dependencyCount})";
             }
 
             void UpdateButtonState()
