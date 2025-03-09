@@ -1,0 +1,137 @@
+﻿using Newtonsoft.Json;
+using REPOLib.Objects.Sdk;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Unity.SharpZipLib.Utils;
+using UnityEditor;
+using UnityEngine;
+
+namespace REPOLibSdk.Editor
+{
+    public static class PackageExporter
+    {
+        public static IEnumerable<string> FindContents(Mod mod)
+        {
+            string modPath = AssetDatabase.GetAssetPath(mod);
+            string directory = Path.GetDirectoryName(modPath);
+            return AssetDatabase.FindAssets("t:Content", new[] { directory })
+                .Select(AssetDatabase.GUIDToAssetPath);
+        }
+        
+        public static void ExportPackage(Mod mod, string outputPath)
+        {
+            CreateDirectoryIfNotExists(outputPath);
+            
+            string[] assetPaths = FindContents(mod)
+                .Append(AssetDatabase.GetAssetPath(mod))
+                .ToArray();
+            string bundlePath = Path.GetFullPath(Path.Combine(outputPath, "bundle"));
+            bundlePath = BuildAssetBundle(mod, bundlePath, assetPaths);
+
+            string packagePath = Path.Combine(outputPath, "package");
+            DeleteAndRecreateDirectory(packagePath);
+            
+            string finalBundlePath = Path.Combine(packagePath, mod.Name + ".repobundle");
+            File.Copy(bundlePath, finalBundlePath);
+
+            WriteReadme(mod, packagePath);
+            WriteIcon(mod, packagePath);
+            WriteManifest(mod, packagePath);
+
+            string zipPath = Path.Combine(outputPath, $"{mod.Identifier}.zip");
+            ZipUtility.CompressFolderToZip(zipPath, null, packagePath);
+            
+            AssetDatabase.Refresh();
+            EditorUtility.RevealInFinder(zipPath);
+        }
+        
+        private static void WriteReadme(Mod mod, string packagePath)
+        {
+            string fromPath = AssetDatabase.GetAssetPath(mod.Readme);
+            File.Copy(fromPath, Path.Combine(packagePath, "README.md"));
+        }
+        
+        private static void WriteIcon(Mod mod, string packagePath)
+        {
+            string fromPath = AssetDatabase.GetAssetPath(mod.Icon);
+            File.Copy(fromPath, Path.Combine(packagePath, "icon.png"));
+        }
+        
+        private static void WriteManifest(Mod mod, string packagePath)
+        {
+            var manifest = new ThunderstoreManifest
+            {
+                Name = mod.Name,
+                Description = mod.Description,
+                Version = mod.Version,
+                Dependencies = mod.Dependencies.ToArray(),
+                WebsiteUrl = mod.WebsiteUrl
+            };
+            
+            var json = JsonConvert.SerializeObject(manifest, Formatting.Indented);
+            File.WriteAllText(Path.Combine(packagePath, "manifest.json"), json);
+        }
+
+        private static string BuildAssetBundle(Mod mod, string path, string[] assetNames)
+        {
+            Debug.Log($"Building bundle to {path}");
+            
+            DeleteAndRecreateDirectory(path);
+            
+            var manifest = BuildPipeline.BuildAssetBundles(new BuildAssetBundlesParameters
+            {
+                outputPath = path,
+                bundleDefinitions = new[]
+                {
+                    new AssetBundleBuild
+                    {
+                        assetBundleName = mod.Name,
+                        assetNames = assetNames
+                    }
+                },
+                options = BuildAssetBundleOptions.UseContentHash,
+                targetPlatform = BuildTarget.StandaloneWindows64
+            });
+
+            Debug.Log(string.Join(", ", manifest.GetAllDependencies(mod.Name)));
+            
+            return Path.Combine(path, mod.Name);
+        }
+
+        private static void CreateDirectoryIfNotExists(string path)
+        {
+            if (Directory.Exists(path)) return;
+            
+            Directory.CreateDirectory(path);
+        }
+
+        private static void DeleteAndRecreateDirectory(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+            
+            Directory.CreateDirectory(path);
+        }
+        
+        private class ThunderstoreManifest
+        {
+            [JsonProperty("name")]
+            public string Name;
+            
+            [JsonProperty("description")]
+            public string Description;
+            
+            [JsonProperty("version_number")]
+            public string Version;
+            
+            [JsonProperty("dependencies")]
+            public string[] Dependencies;
+            
+            [JsonProperty("website_url")]
+            public string WebsiteUrl;
+        }
+    }
+}
