@@ -5,6 +5,8 @@
 ## Features
 
 - Registering custom valuables without code
+- Registering custom items without code
+- Registering custom enemies without code
 - Automatic asset bundling and Thunderstore packaging
 
 ## Usage
@@ -45,16 +47,24 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 ### Create a valuable
 
 - Create a valuable prefab.
-  - More documentation is on its way here. For now, use the vanilla valuables as reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/valuables`.
+  - More documentation is on its way here. For now, use the vanilla valuables as a reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/valuables`.
 - Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Valuable`.
 - Fill in the fields:
   - `Prefab`: A reference to your prefab. The prefab does not have to be in the mod folder.
-  - `Add to All Levels`: Whether to register the valuable on all levels or specify them yourself.
-  - `Level Names`: The level presets to register the valuable in. Ignored if `Add to All Levels` is `true`. The vanilla values are:
+  - `Valuable Presets`: The valuable presets to register the valuable to. The vanilla values are:
     - `Valuables - Generic`
     - `Valuables - Wizard`
     - `Valuables - Manor`
     - `Valuables - Arctic`
+
+### Create an item
+- Create an item prefab.
+  - More documentation is on its way here. For now, use the vanilla item prefabs as a reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/items`.
+- Create an `Item` by right clicking and going to `Create > Other > Item`.
+  - More documentation is on its way here. For now, use the vanilla items as a reference. If you used the patcher, they are located in `Assets/REPO/Game/Resources/items/items`.
+- Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Item`.
+- Fill in the fields:
+  - `Prefab`: A reference to your prefab. The prefab does not have to be in the mod folder.
 
 ### Create an enemy
 
@@ -80,9 +90,7 @@ Anyone is free to contribute.
 https://github.com/ZehsTeam/REPOLib-Sdk
 
 ## Developer Contact
-
-#### Report bugs, suggest features, or provide feedback:
-
+**Report bugs, suggest features, or provide feedback:**
 - **GitHub Issues Page:** [REPOLib](https://github.com/ZehsTeam/REPOLib/issues)
 - **Email:** crithaxxog@gmail.com
 - **Twitch:** [CritHaxXoG](https://www.twitch.tv/crithaxxog)
