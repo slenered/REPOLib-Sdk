@@ -93,7 +93,7 @@ namespace REPOLibSdk.Editor
             
             DeleteAndRecreateDirectory(path);
             
-            var manifest = BuildPipeline.BuildAssetBundles(new BuildAssetBundlesParameters
+            BuildPipeline.BuildAssetBundles(new BuildAssetBundlesParameters
             {
                 outputPath = path,
                 bundleDefinitions = new[]
@@ -107,8 +107,6 @@ namespace REPOLibSdk.Editor
                 options = BuildAssetBundleOptions.UseContentHash,
                 targetPlatform = BuildTarget.StandaloneWindows64
             });
-
-            Debug.Log(string.Join(", ", manifest.GetAllDependencies(mod.Name)));
             
             return Path.Combine(path, mod.Name);
         }
