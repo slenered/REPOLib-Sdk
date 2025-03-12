@@ -50,6 +50,7 @@ namespace REPOLibSdk.Editor
             File.Copy(bundlePath, finalBundlePath);
 
             WriteReadme(mod, packagePath);
+            WriteChangelog(mod, packagePath);
             WriteIcon(mod, packagePath);
             WriteManifest(mod, packagePath);
 
@@ -66,6 +67,13 @@ namespace REPOLibSdk.Editor
             File.Copy(fromPath, Path.Combine(packagePath, "README.md"));
         }
         
+
+        private static void WriteChangelog(Mod mod, string packagePath)
+        {
+            string fromPath = AssetDatabase.GetAssetPath(mod.Changelog);
+            File.Copy(fromPath, Path.Combine(packagePath, "CHANGELOG.md"));
+        }
+
         private static void WriteIcon(Mod mod, string packagePath)
         {
             string fromPath = AssetDatabase.GetAssetPath(mod.Icon);
