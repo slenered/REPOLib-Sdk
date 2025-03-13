@@ -50,6 +50,7 @@ namespace REPOLibSdk.Editor
             File.Copy(bundlePath, finalBundlePath);
 
             WriteReadme(mod, packagePath);
+            WriteChangelog(mod, packagePath);
             WriteIcon(mod, packagePath);
             WriteManifest(mod, packagePath);
 
@@ -62,13 +63,50 @@ namespace REPOLibSdk.Editor
         
         private static void WriteReadme(Mod mod, string packagePath)
         {
+            if (mod.Readme == null)
+            {
+                Debug.LogWarning($"No Readme set for mod \"{mod.Name}\"");
+                return;
+            }
             string fromPath = AssetDatabase.GetAssetPath(mod.Readme);
+            if (string.IsNullOrWhiteSpace(fromPath) || !File.Exists(fromPath))
+            {
+                Debug.LogError($"Invalid readme path \"{fromPath}\".");
+                return;
+            }
             File.Copy(fromPath, Path.Combine(packagePath, "README.md"));
         }
         
+
+        private static void WriteChangelog(Mod mod, string packagePath)
+        {
+            if (mod.Changelog == null)
+            {
+                // Changelog isn't strictly necessary, no need to log a warning
+                return;
+            }
+            string fromPath = AssetDatabase.GetAssetPath(mod.Changelog);
+            if (string.IsNullOrWhiteSpace(fromPath) || !File.Exists(fromPath))
+            {
+                Debug.LogError($"Invalid changelog path \"{fromPath}\".");
+                return;
+            }
+            File.Copy(fromPath, Path.Combine(packagePath, "CHANGELOG.md"));
+        }
+
         private static void WriteIcon(Mod mod, string packagePath)
         {
+            if (mod.Icon == null)
+            {
+                Debug.LogWarning($"No Icon set for mod \"{mod.Name}\"");
+                return;
+            }
             string fromPath = AssetDatabase.GetAssetPath(mod.Icon);
+            if (string.IsNullOrWhiteSpace(fromPath) || !File.Exists(fromPath))
+            {
+                Debug.LogError($"Invalid icon path \"{fromPath}\".");
+                return;
+            }
             File.Copy(fromPath, Path.Combine(packagePath, "icon.png"));
         }
         
