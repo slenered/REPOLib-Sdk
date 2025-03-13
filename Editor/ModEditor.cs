@@ -20,6 +20,7 @@ namespace REPOLibSdk.Editor
             Util.PropertyField("_websiteUrl", serializedObject, root);
             Util.PropertyField("_icon", serializedObject, root);
             Util.PropertyField("_readme", serializedObject, root);
+            Util.PropertyField("_changelog", serializedObject, root);
 
             var button = new Button(() => {
                 ExportWindow.Open((Mod)target);
