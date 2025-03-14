@@ -67,6 +67,8 @@ namespace REPOLibSdk.Editor
 
             foreach (var file in settings.ExtraFiles)
             {
+                if (file == null) continue;
+                
                 string fromPath = AssetDatabase.GetAssetPath(file);
                 string toPath = Path.Combine(packagePath, Path.GetFileName(fromPath));
                 

@@ -42,7 +42,7 @@ namespace REPOLibSdk.Editor
                 if (settings.Mod != null) continue;
                 
                 AssetDatabase.RemoveObjectFromAsset(settings);
-                DestroyImmediate(settings);
+                DestroyImmediate(settings, allowDestroyingAssets: true);
                 
                 _settings.RemoveAt(i);
                 i--;
