@@ -21,7 +21,7 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 - Copy `REPOLib.dll` into your project.
 
 > [!TIP]
-> To update REPOLib, replace the dll with a newer version.
+> To update REPOLib, replace the dll with a newer version's.
 
 **2. Add REPOLib-Sdk to the project**
 
@@ -46,6 +46,7 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
   - `Website Url`: Optional.
   - `Icon`: must be a 256x256 PNG file.
   - `Readme`: a longer description of the mod, in a separate file. Supports markdown formatting.
+  - `Extra Files`: additional files that will be included in the package, for example a dll containing your scripts.
 
 > [!TIP]
 > You can have multiple mods in the same project, as long as they're in separate folders.
