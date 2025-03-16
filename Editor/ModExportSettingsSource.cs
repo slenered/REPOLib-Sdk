@@ -58,7 +58,7 @@ namespace REPOLibSdk.Editor
             switch (sources.Length)
             {
                 case 0:
-                    Log.Info("No ModExportSettingsSource found, creating a new one.");
+                    Debug.Log("No ModExportSettingsSource found, creating a new one.");
                     
                     var source = CreateInstance<ModExportSettingsSource>();
                     AssetDatabase.CreateAsset(source, "Assets/ModExportSettingsSource.asset");
