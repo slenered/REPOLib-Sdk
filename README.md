@@ -84,16 +84,14 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 
 - Select the `Mod` asset and click `Export` in the inspector.
   - In the window you'll see the associated content files found by REPOLib-Sdk.
-
-> [!TIP]
-> The export window can also be accessed from `Window > REPOLib Exporter`
-
 - Choose an `Output Path`. The path is relative to the Unity project (unless you specify an absolute path).
+- Click `Export` and wait. Once finished, a window should appear showing the exported zip file. This file can be uploaded to Thunderstore or locally imported into mod managers.
 
 > [!WARNING]
 > REPOLib-Sdk deletes and creates multiple folders and files under the export path. Therefore, it is recommended to use a new, empty folder as the target.
 
-- Click `Export` and wait. Once finished, a window should appear showing the exported zip file. This file can be uploaded to Thunderstore or locally imported into mod managers.
+> [!TIP]
+> The export window can also be accessed from `Window > REPOLib Exporter`
 
 ### Using custom scripts
 
@@ -103,14 +101,13 @@ Unfortunately, custom scripts cannot be developed from inside the Unity editor. 
   - There are templates available for this, for example [linkoid's Repo Sdks](https://github.com/linkoid/Repo.Sdks) and [Matty's Mod Templates](https://discord.com/channels/1344557689979670578/1348716513410027601) (discord thread link).
 - Write your scripts in that project.
 - Build the project and copy the output dll into your Unity project.
-
-> [!TIP]
-> You can use a MSBuild target to automatically copy the dll on each build.
-
 - If needed, copy the BepInEx dlls to your project.
   - If you used the [R.E.P.O. Project Patcher](https://github.com/Kesomannen/unity-repo-project-patcher), these will already be in your project.
 - Attach the scripts to your prefabs.
 - Include the dll in the `Extra Files` field on your `Mod` asset.
+
+> [!TIP]
+> You can use a MSBuild target to automatically copy the dll on each build.
 
 ## Contribute
 
