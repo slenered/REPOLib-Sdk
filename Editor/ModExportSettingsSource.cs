@@ -38,6 +38,13 @@ namespace REPOLibSdk.Editor
             for (int i = 0; i < _settings.Count; i++)
             {
                 var settings = _settings[i];
+                if (settings == null)
+                {
+                    _settings.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+                
                 if (settings.Mod != null) continue;
                 
                 AssetDatabase.RemoveObjectFromAsset(settings);
