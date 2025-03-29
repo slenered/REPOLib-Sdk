@@ -7,6 +7,7 @@
 - Registering custom valuables without code
 - Registering custom items without code
 - Registering custom enemies without code
+- Registering custom levels without code
 - Automatic asset bundling and Thunderstore packaging
 
 ## Installation
@@ -80,6 +81,15 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 - Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Enemy`.
 - Fill in the fields.
 
+### Create a level
+
+- Create a `Level` by right clicking and going to `Create > Level > Level Preset`.
+  - The patcher outputs vanilla levels to `Assets/REPO/Game/ScriptableObjects/Level` and their assets to `Assets/REPO/Game/Resources/level`.
+- On the `Level` asset, make sure that the `Valuable Presets` list is empty.
+  - This will make generic valuables spawn in your level. If you'd like specific valuables to also spawn, see [Proxy valuable presets](#proxy-valuable-presets).
+- Right click in your mod folder (or any subfolder) and choose `Create > REPOLib > Level`.
+- Fill in the fields.
+
 ### Export a mod
 
 - Select the `Mod` asset and click `Export` in the inspector.
@@ -89,6 +99,32 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 
 > [!TIP]
 > The export window can also be accessed from `Window > REPOLib Exporter`
+
+### Using custom scripts
+
+Unfortunately, custom scripts cannot be developed from inside the Unity editor. Instead, you have to write your scripts elsewhere:
+
+- Create a new C# project for R.E.P.O. modding.
+  - There are templates available for this, for example [linkoid's Repo Sdks](https://github.com/linkoid/Repo.Sdks) and [Matty's Mod Templates](https://discord.com/channels/1344557689979670578/1348716513410027601) (discord thread link).
+- Write your scripts in that project.
+- Build the project and copy the output dll into your Unity project.
+- If needed, copy the BepInEx dlls to your project.
+  - If you used the [R.E.P.O. Project Patcher](https://github.com/Kesomannen/unity-repo-project-patcher), these will already be in your project.
+- Attach the scripts to your prefabs.
+- Include the dll in the `Extra Files` field on your `Mod` asset.
+
+> [!TIP]
+> You can use a MSBuild target to automatically copy the dll on each build.
+
+### Proxy valuable presets
+
+To use vanilla `Level Valuables` presets in your custom levels, you should not simply reference them in the `Level` asset. This is because the bundle will then contain duplicates of all the vanilla valuables from that preset. Instead, you have to create a "proxy" preset:
+
+- Create a `Level Valuables` anywhere in your project by going to `Create > Level > Level Valuable Preset`
+- Name the asset exactly as the vanilla one you want to include (see [Create a valuable](#create-a-valuable)).
+- Add your newly created preset to `Level Valuables` in your `Level` asset.
+
+At runtime, REPOLib will match the name and replace your proxy with the real thing.
 
 ## Contribute
 
