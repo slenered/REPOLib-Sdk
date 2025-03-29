@@ -60,7 +60,7 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 - Fill in the fields:
   - `Prefab`: A reference to your prefab. The prefab does not have to be in the mod folder.
   - `Valuable Presets`: The valuable presets to register the valuable to. The vanilla values are:
-    - `Valuables - Generic`
+    - `Valuables - Generic` (applies to every level)
     - `Valuables - Wizard`
     - `Valuables - Manor`
     - `Valuables - Arctic`
@@ -94,8 +94,11 @@ If not, use a tool like [R.E.P.O. Project Patcher](https://github.com/Kesomannen
 
 - Select the `Mod` asset and click `Export` in the inspector.
   - In the window you'll see the associated content files found by REPOLib-Sdk.
-- Choose an `Output Path`. If there isn't a folder at the selected path, one will be created.
+- Choose an `Output Path`. The path is relative to the Unity project (unless you specify an absolute path).
 - Click `Export` and wait. Once finished, a window should appear showing the exported zip file. This file can be uploaded to Thunderstore or locally imported into mod managers.
+
+> [!WARNING]
+> REPOLib-Sdk deletes and creates multiple folders and files under the export path. Therefore, it is recommended to use a new, empty folder as the target.
 
 > [!TIP]
 > The export window can also be accessed from `Window > REPOLib Exporter`
